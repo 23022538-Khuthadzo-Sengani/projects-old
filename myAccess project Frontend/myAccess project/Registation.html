@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University First-Time Registration</title>
+  <style>
+    /* ===== Global Styling ===== */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      /* Smooth blue gradient background */
+      background: linear-gradient(135deg, #0d47a1, #1976d2, #2196f3, #64b5f6);
+      background-size: 400% 400%;
+      animation: gradientShift 18s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ===== Container Styling ===== */
+    .container {
+      max-width: 800px;
+      width: 100%;
+      padding: 35px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.95); /* slight transparency for seamless look */
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      backdrop-filter: blur(6px);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Headings ===== */
+    h2 {
+      text-align: center;
+      color: #0d47a1;
+      margin-bottom: 25px;
+    }
+
+    .form-section {
+      margin-bottom: 25px;
+    }
+
+    .form-section h3 {
+      color: #1976d2;
+      margin-bottom: 10px;
+      border-left: 4px solid #1976d2;
+      padding-left: 10px;
+      font-size: 18px;
+    }
+
+    /* ===== Form Inputs ===== */
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 12px;
+      color: #0d47a1;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #1976d2;
+      box-shadow: 0 0 6px rgba(25,118,210,0.5);
+      outline: none;
+    }
+
+    /* ===== Buttons ===== */
+    button, .logout-btn, .login-link {
+      display: inline-block;
+      background-color: #1976d2;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      width: 100%;
+      margin-top: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    button:hover, .logout-btn:hover, .login-link:hover {
+      background-color: #0d47a1;
+      transform: scale(1.02);
+    }
+
+    /* ===== Logout Button (top-right) ===== */
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: auto;
+      padding: 10px 18px;
+      background: #d32f2f;
+    }
+    .logout-btn:hover {
+      background: #b71c1c;
+    }
+
+    /* Login link styled like a secondary button */
+    .login-link {
+      background: transparent;
+      border: 2px solid #1976d2;
+      color: #1976d2;
+      margin-top: 10px;
+    }
+    .login-link:hover {
+      background: #1976d2;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Logout button -->
+<a href="home.html" class="logout-btn">Logout</a>
+
+<div class="container">
+  <h2>University First-Time Registration</h2>
+  <form action="submit_registration.php" method="POST">
+
+    <!-- Personal Details -->
+    <div class="form-section">
+      <h3>Personal Information</h3>
+      <label for="first_name">First Name *</label>
+      <input type="text" id="first_name" name="first_name" required>
+
+      <label for="last_name">Last Name *</label>
+      <input type="text" id="last_name" name="last_name" required>
+
+      <label for="dob">Date of Birth *</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="gender">Gender *</label>
+      <select id="gender" name="gender" required>
+        <option value="">-- Select --</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="form-section">
+      <h3>Contact Information</h3>
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" placeholder="example@email.com" required>
+
+      <label for="phone">Phone Number *</label>
+      <input type="tel" id="phone" name="phone" placeholder="+27..." required>
+
+      <label for="address">Home Address *</label>
+      <textarea id="address" name="address" rows="3" required></textarea>
+    </div>
+
+    <!-- Academic Information -->
+    <div class="form-section">
+      <h3>Academic Information</h3>
+      <label for="id_number">National ID Number *</label>
+      <input type="text" id="id_number" name="id_number" required>
+
+      <label for="highschool">High School Name *</label>
+      <input type="text" id="highschool" name="highschool" required>
+
+      <label for="final_marks">Final Grade Marks (%) *</label>
+      <input type="number" id="final_marks" name="final_marks" min="0" max="100" required>
+
+      <label for="course">Course Applying For *</label>
+      <select id="course" name="course" required>
+        <option value="">-- Select Course --</option>
+        <option>Bachelor of Science</option>
+        <option>Bachelor of Arts</option>
+        <option>Bachelor of Commerce</option>
+        <option>Bachelor of Engineering</option>
+      </select>
+    </div>
+
+    <!-- Login Setup -->
+    <div class="form-section">
+      <h3>Account Login Setup</h3>
+      <label for="username">Create Username *</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Create Pin *</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="confirm_password">Confirm Pin *</label>
+      <input type="password" id="confirm_password" name="confirm_password" required>
+    </div>
+
+    <!-- Submit & Login -->
+    <button type="submit">Submit Application</button>
+    <a href="login.html" class="login-link">Already Registered? Log In</a>
+
+  </form>
+</div>
+
+</body>
+</html>

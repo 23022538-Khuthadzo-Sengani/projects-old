@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-white text-black font-sans">
+
+  <!-- NAVBAR -->
+  <header class="bg-[#97dffc] text-white px-6 py-4 flex justify-between items-center">
+    <div class="text-2xl font-bold">Khuthadzo Sengani</div>
+    <nav class="space-x-6 hidden md:flex">
+      <a href="#about" class="hover:text-[#97dffc]">about</a>
+      <a href="#skills" class="hover:text-[#97dffc]">skills</a>
+      <a href="#projects" class="hover:text-[#97dffc]">projects</a>
+      <a href="#contact" class="hover:text-[#97dffc]">contact</a>
+    </nav>
+    <div class="flex space-x-4">
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="hover:text-[#97dffc]"><i class="fab fa-linkedin text-xl"></i></a>
+      <a href="https://github.com/yourprofile" target="_blank" class="hover:text-[#97dffc]"><i class="fab fa-github text-xl"></i></a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="flex flex-col md:flex-row items-center justify-center py-15 px-6 text-center md:text-left">
+    <!-- Left side -->
+    <div class="md:w-1/2">
+        <!--
+      <h1 class="text-5xl font-bold">designer</h1>
+      <p class="mt-4 text-gray-600">Computer science student interested in UI/UX design, building clean and creative layouts.</p>
+    -->
+    </div>
+    <!-- Middle Image -->
+    <div class="w-48 h-48 md:w-64 md:h-64 overflow-hidden rounded-full shadow-lg">
+  <img src="pic1.png" alt="My Photo" class="w-full h-full object-cover">
+</div>
+
+    <!-- Right side -->
+    <div class="md:w-1/2">
+        <!--
+      <h1 class="text-5xl font-bold">&lt;coder&gt;</h1>
+      <p class="mt-4 text-gray-600">Passionate about writing clean, efficient, and scalable code in modern languages.</p>
+      -->
+      <p class="mt-4 text-gray-600">the life is sometimes not the make sure at all but so long as you have the lord you have all that you need</p>
+    </div>
+  </section>
+  <!-- for words after picture-->
+  <section id="information" class="bg-[#97dffc] text-white px-6 py-4 flex justify-between items-center">
+    <div>
+    <p>May the lord be with you</p>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills" class="bg-gray-100 py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8 text-center">My Skills</h2>
+      <div class="space-y-6">
+        <div>
+          <span class="font-semibold">Python</span>
+          <div class="w-full bg-gray-300 rounded-full h-5 mt-2">
+            <div class="bg-[#97dffc] h-5 rounded-full text-right pr-3 text-sm font-bold" style="width: 85%">58%</div>
+          </div>
+        </div>
+        <div>
+          <span class="font-semibold">JavaScript</span>
+          <div class="w-full bg-gray-300 rounded-full h-5 mt-2">
+            <div class="bg-[#97dffc] h-5 rounded-full text-right pr-3 text-sm font-bold" style="width: 75%">75%</div>
+          </div>
+        </div>
+        <div>
+          <span class="font-semibold">C++</span>
+          <div class="w-full bg-gray-300 rounded-full h-5 mt-2">
+            <div class="bg-[#97dffc] h-5 rounded-full text-right pr-3 text-sm font-bold" style="width: 60%">60%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="py-16 px-6">
+    <h2 class="text-3xl font-bold mb-8 text-center">Top Projects</h2>
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="border rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+        <img src="prj1.png" alt="Project 1" class="w-full">
+        <p class="text-center py-3 font-semibold">Project One</p>
+      </div>
+      <div class="border rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+        <img src="project2.jpg" alt="Project 2" class="w-full">
+        <p class="text-center py-3 font-semibold">Project Two</p>
+      </div>
+      <div class="border rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+        <img src="project3.jpg" alt="Project 3" class="w-full">
+        <p class="text-center py-3 font-semibold">Project Three</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="bg-gray-100 py-6 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Find Me Online</h2>
+      <div class="flex justify-center space-x-6 text-xl">
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="hover:text-[#97dffc]"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/yourprofile" target="_blank" class="hover:text-[#97dffc]"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#97dffc] text-black text-center py-6">
+    <p>© 2025 My Portfolio. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

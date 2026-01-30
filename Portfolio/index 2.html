@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-black font-sans">
+
+  <!-- Header -->
+  <header class="bg-[#97dffc] text-black py-6 text-center shadow-md">
+    <h1 class="text-4xl font-bold">My Portfolio</h1>
+    <nav class="mt-3">
+      <a href="#about" class="mx-3 font-semibold hover:underline">About</a>
+      <a href="#skills" class="mx-3 font-semibold hover:underline">Skills</a>
+      <a href="#projects" class="mx-3 font-semibold hover:underline">Projects</a>
+      <a href="#contact" class="mx-3 font-semibold hover:underline">Contact</a>
+    </nav>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold mb-4">About Me</h2>
+    <p class="text-lg mb-6">
+      Hello! I am a computer science student passionate about coding, technology, and solving real-world problems.
+    </p>
+    <h3 class="text-2xl font-semibold mb-2">Interests</h3>
+    <p class="text-lg">Web Development, Artificial Intelligence, Open Source, and Game Development.</p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="bg-gray-100 py-12 px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">My Skills</h2>
+      <div class="space-y-6">
+
+        <div>
+          <span class="font-semibold">Python</span>
+          <div class="w-full bg-gray-300 rounded-full h-5 mt-2">
+            <div class="bg-[#97dffc] h-5 rounded-full text-right pr-3 text-sm font-bold" style="width: 85%">85%</div>
+          </div>
+        </div>
+
+        <div>
+          <span class="font-semibold">JavaScript</span>
+          <div class="w-full bg-gray-300 rounded-full h-5 mt-2">
+            <div class="bg-[#97dffc] h-5 rounded-full text-right pr-3 text-sm font-bold" style="width: 75%">75%</div>
+          </div>
+        </div>
+
+        <div>
+          <span class="font-semibold">C++</span>
+          <div class="w-full bg-gray-300 rounded-full h-5 mt-2">
+            <div class="bg-[#97dffc] h-5 rounded-full text-right pr-3 text-sm font-bold" style="width: 60%">60%</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="max-w-6xl mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold mb-6">Top Projects</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="border rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+        <img src="project1.jpg" alt="Project 1" class="w-full">
+        <p class="text-center py-3 font-semibold">Project One</p>
+      </div>
+
+      <div class="border rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+        <img src="project2.jpg" alt="Project 2" class="w-full">
+        <p class="text-center py-3 font-semibold">Project Two</p>
+      </div>
+
+      <div class="border rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+        <img src="project3.jpg" alt="Project 3" class="w-full">
+        <p class="text-center py-3 font-semibold">Project Three</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-gray-100 py-12">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Find Me Online</h2>
+      <div class="space-x-6">
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-lg font-semibold hover:underline">LinkedIn</a>
+        <a href="https://github.com/yourprofile" target="_blank" class="text-lg font-semibold hover:underline">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white text-center py-6 mt-12">
+    <p>© 2025 My Portfolio. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

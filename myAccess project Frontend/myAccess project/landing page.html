@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UNIVEN Student Portal</title>
+  <style>
+    :root{
+      --blue:#0b4f8a;
+      --blue-dark:#083a65;
+      --light:#f5f8fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+    }
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      display:flex;
+      height:100vh;
+      background:var(--light);
+      color:#111827;
+    }
+
+    /* Sidebar */
+    .sidebar{
+      width:260px;
+      background:var(--blue);
+      color:white;
+      display:flex;
+      flex-direction:column;
+      padding:20px 16px;
+    }
+    .sidebar img{
+      width:120px;
+      margin:0 auto 20px;
+      display:block;
+    }
+    .sidebar h2{
+      font-size:16px;
+      margin:0 0 20px;
+      color:white;
+      text-align:center;
+      font-weight:600;
+    }
+    .menu{
+      list-style:none;
+      padding:0;
+      margin:0;
+      flex-grow:1;
+    }
+    .menu li{
+      margin-bottom:6px;
+      position: relative; /* Needed for dropdown positioning */
+    }
+    .menu li button{
+      width:100%;
+      padding:10px 12px;
+      background:transparent;
+      border:none;
+      text-align:left;
+      font-size:14px;
+      color:white;
+      cursor:pointer;
+      border-radius:6px;
+      transition:background 0.2s;
+    }
+    .menu li button:hover{
+      background:rgba(255,255,255,0.15);
+    }
+    /* Dropdown menu styles */
+    .dropdown-content {
+      display: none;
+      position: relative;
+      background-color: var(--blue-dark);
+      min-width: 100%;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 6px;
+      padding: 6px 0;
+      margin-top: 4px;
+    }
+    .dropdown-content a {
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      display: block;
+      font-size: 13px;
+      transition: background-color 0.2s;
+    }
+    .dropdown-content a:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+    .dropdown-content a:first-child {
+      padding-top: 10px;
+    }
+    .dropdown-content a:last-child {
+      padding-bottom: 10px;
+    }
+    .dropdown-active {
+      background-color: var(--blue-dark);
+    }
+
+    .logout {
+      padding:10px;
+      background:white;
+      color:var(--blue);
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:600;
+      margin-top:20px;
+      transition:background 0.2s, color 0.2s;
+    }
+    .logout:hover {
+      background:var(--blue-dark);
+      color:white;
+    }
+
+    /* Content */
+    .content{
+      flex-grow:1;
+      display:flex;
+      flex-direction:column;
+      background:var(--light);
+    }
+    .content-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:var(--blue);
+      color:white;
+      padding:14px 20px;
+    }
+    .content-header h3{
+      margin:0;
+      font-size:16px;
+    }
+    .student-info{
+      margin:20px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      background:var(--card);
+      border-radius:10px;
+      padding:16px 20px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    }
+    .student-info div{
+      padding:8px;
+      border-radius:6px;
+      background:var(--light);
+      font-size:14px;
+    }
+    .student-info strong{
+      display:block;
+      font-weight:600;
+      margin-bottom:2px;
+    }
+    .info-buttons{
+      margin:0 20px 20px;
+      display:flex;
+      gap:12px;
+    }
+    .info-buttons button{
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:8px;
+      background:var(--blue);
+      color:white;
+      cursor:pointer;
+      font-weight:600;
+      transition:background 0.2s;
+    }
+    .info-buttons button:hover{
+      background:var(--blue-dark);
+    }
+    footer{
+      margin-top:auto;
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+      padding:12px;
+    }
+
+    @media(max-width:768px){
+      body{flex-direction:column;}
+      .sidebar{width:100%;flex-direction:row;overflow-x:auto;}
+      .menu{display:flex;flex-wrap:nowrap; padding-bottom: 20px;}
+      .menu li{margin:0 6px;}
+      .content-header{flex-direction:column;gap:6px;}
+      .student-info{grid-template-columns:1fr;}
+      .info-buttons{flex-direction: column;}
+      .logout-btn {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        background: white;
+        color: var(--blue);
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.2s, color 0.2s;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <!-- Univen Logo -->
+    <img src="https://placehold.co/120x120/0B4F8A/FFFFFF?text=UNIVEN+Logo" alt="UNIVEN Logo">
+    <h2>Student iEnabler</h2>
+    <ul class="menu">
+      <li><button>Academic Application</button></li>
+      <li><button>Examinations</button></li>
+      <li><button>Residence Application</button></li>
+      <li><button>Residence Registration</button></li>
+      <li><button>Academic Registration</button></li>
+      <li><button>Student Administration</button></li>
+      <li id="studentEnquiryMenuItem">
+        <button id="studentEnquiryBtn">Student Enquiry</button>
+        <div id="studentEnquiryDropdown" class="dropdown-content">
+          <a href="#">Summarised Statement of Account</a>
+          <a href="#">Examination Timetable</a>
+          <a href="#">Examination Results</a>
+          <a href="#">View Correspondence</a>
+          <a href="student.html">Academic Record</a>
+          <a href="#">Academic Admission Status</a>
+          <a href="#">Proof of Registration</a>
+          <a href="#">Residence Admission Status</a>
+          <a href="#">Financial Aid Details</a>
+          <a href="#">Aged Statement of Account</a>
+          <a href="#">Detail Address/Contacts Enquiry</a>
+          <a href="#">Personal Contact Detail</a>
+          <a href="#">Certificates seen</a>
+          <a href="#">Matric Subject Detail</a>
+          <a href="#">Assessment Status</a>
+          <a href="#">Exam Admission Slip</a>
+          <a href="#">Enrolment Detail - PDF</a>
+          <a href="#">Graduation Confirmation Letter</a>
+        </div>
+      </li>
+      <li><button>Adumo Online Payment</button></li>
+      <li><button>Banking Details</button></li>
+      <li><button>SID EFT Payments</button></li>
+      <li><button>Student Finance</button></li>
+      <li><button>Medical Web</button></li>
+      <li><button>Subject Cancellation</button></li>
+      <li><button>Leaving Institution Survey</button></li>
+      <li><button>Verify Biographical Detail</button></li>
+    </ul>
+    <a href="login.html" class="logout-btn">Logout</a>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+    <div class="content-header">
+      <h3>University of Venda PRODI41</h3>
+      <span>Monday, 25th August 2025</span>
+    </div>
+
+    <div class="student-info">
+      <div><strong>Student Nbr:</strong> 12345678</div>
+      <div><strong>Gender:</strong> Male</div>
+      <div><strong>Birthdate:</strong> 2000-01-01</div>
+      <div><strong>ID Nbr:</strong> 0000000000000</div>
+      <div><strong>Marital Status:</strong> Single</div>
+      <div><strong>Home Lang:</strong> VENDA</div>
+      <div><strong>Citizenship:</strong> RSA</div>
+      <div><strong>Email:</strong> student@email.com</div>
+      <div><strong>Cellphone:</strong> 0123456789</div>
+      <div><strong>Postal Address:</strong> Example Address</div>
+      <div><strong>Study Address:</strong> Campus A</div>
+      <div><strong>Current Balance:</strong> R 0.00</div>
+    </div>
+
+    <div class="info-buttons">
+      <button>Registration Information</button>
+      <button>Residence Information</button>
+      <button>Financial Information</button>
+    </div>
+
+    <footer>
+      © University of Venda — All rights reserved.
+    </footer>
+  </main>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const studentEnquiryBtn = document.getElementById('studentEnquiryBtn');
+      const dropdown = document.getElementById('studentEnquiryDropdown');
+      const menuItem = document.getElementById('studentEnquiryMenuItem');
+
+      studentEnquiryBtn.addEventListener('click', (event) => {
+        // Toggle the display of the dropdown menu
+        const isDisplayed = dropdown.style.display === 'block';
+        dropdown.style.display = isDisplayed ? 'none' : 'block';
+        menuItem.classList.toggle('dropdown-active', !isDisplayed);
+        event.stopPropagation(); // Prevents the click from propagating to the document
+      });
+
+      // Close the dropdown if the user clicks outside of it
+      document.addEventListener('click', (event) => {
+        if (!menuItem.contains(event.target)) {
+          dropdown.style.display = 'none';
+          menuItem.classList.remove('dropdown-active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

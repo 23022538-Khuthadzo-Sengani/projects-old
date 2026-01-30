@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturer's Student Marks</title>
+    <!-- Use Tailwind CSS for modern styling and responsiveness -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the table for better aesthetics */
+        .marks-table th, .marks-table td {
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .marks-table th {
+            background-color: #3b82f6; /* Tailwind's blue-500 */
+            color: white;
+            font-weight: bold;
+        }
+
+        .marks-table tr:nth-child(even) {
+            background-color: #e5e7eb; /* Tailwind's gray-200 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 font-sans antialiased">
+
+    <!-- Main container for the form -->
+    <div class="bg-white shadow-2xl rounded-xl p-8 max-w-4xl w-full">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Student Marks Entry</h1>
+
+        <form id="marksForm">
+            <!-- Table for entering student data -->
+            <div class="overflow-x-auto rounded-lg shadow-md mb-6">
+                <table id="marksTable" class="marks-table min-w-full divide-y divide-gray-300">
+                    <thead class="bg-blue-500 text-white rounded-t-lg">
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6 rounded-tl-lg">Student Number</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold">Test 1</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold">Test 2</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold">Assignment</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold">Semester Mark</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold rounded-tr-lg">Final Exam Mark</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white" id="marksTableBody">
+                        <!-- Student row template - first row is pre-filled for convenience -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                <input type="text" name="studentNumber" placeholder="e.g., 12345678" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <input type="number" name="test1" placeholder="Enter mark" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <input type="number" name="test2" placeholder="Enter mark" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <input type="number" name="assignment" placeholder="Enter mark" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <input type="number" name="semesterMark" placeholder="Enter mark" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <input type="number" name="examMark" placeholder="Enter mark" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Buttons for adding rows and submitting the form -->
+            <div class="flex justify-end space-x-4">
+                <button type="button" onclick="addStudentRow()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors">
+                    Add Student
+                </button>
+                <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                    Submit Marks
+                </button>
+            </div>
+        </form>
+
+        <!-- Message box for user feedback -->
+        <div id="messageBox" class="mt-6 p-4 rounded-md hidden"></div>
+    </div>
+
+    <script>
+        /**
+         * Clones the last row of the table and appends it to the body.
+         * It clears the input values so the new row is ready for data entry.
+         */
+        function addStudentRow() {
+            const tableBody = document.getElementById('marksTableBody');
+            const lastRow = tableBody.lastElementChild;
+            const newRow = lastRow.cloneNode(true);
+
+            // Clear the values of the new row's input fields
+            newRow.querySelectorAll('input').forEach(input => {
+                input.value = '';
+            });
+
+            tableBody.appendChild(newRow);
+        }
+
+        /**
+         * Handles the form submission.
+         * It prevents the default form action, gathers the data from the table,
+         * logs it to the console, and displays a success message.
+         */
+        document.getElementById('marksForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the page from reloading
+
+            const messageBox = document.getElementById('messageBox');
+            const tableBody = document.getElementById('marksTableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+            const studentsData = [];
+
+            // Loop through all table rows to collect data
+            for (const row of rows) {
+                const studentNumber = row.querySelector('input[name="studentNumber"]').value;
+                const test1 = row.querySelector('input[name="test1"]').value;
+                const test2 = row.querySelector('input[name="test2"]').value;
+                const assignment = row.querySelector('input[name="assignment"]').value;
+                const semesterMark = row.querySelector('input[name="semesterMark"]').value;
+                const examMark = row.querySelector('input[name="examMark"]').value;
+
+                // Only add a student if a student number has been entered
+                if (studentNumber) {
+                    studentsData.push({
+                        studentNumber: studentNumber,
+                        test1: test1,
+                        test2: test2,
+                        assignment: assignment,
+                        semesterMark: semesterMark,
+                        examMark: examMark
+                    });
+                }
+            }
+
+            // Log the data to the console for demonstration
+            console.log('Submitted student data:', studentsData);
+
+            // Display a success message in the message box
+            messageBox.textContent = 'Marks submitted successfully! Check the console for the data.';
+            messageBox.className = 'mt-6 p-4 rounded-md bg-green-100 text-green-800';
+            messageBox.style.display = 'block';
+
+            // Reset the form (optional)
+            // event.target.reset();
+        });
+    </script>
+
+</body>
+</html>
