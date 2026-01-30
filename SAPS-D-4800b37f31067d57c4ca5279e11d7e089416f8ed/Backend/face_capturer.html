@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Face Capture</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        #video { width: 100%; border: 1px solid #ccc; }
+        #captureBtn { padding: 10px 15px; background-color: #4CAF50; color: white; border: none; cursor: pointer; margin: 10px 0; }
+        #status { margin-top: 10px; font-weight: bold; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h2>Face Capture for <span id="userName"></span> (Badge ID: <span id="badgeId"></span>)</h2>
+    <p>Please position your face in the center of the frame and click "Capture" to register your face.</p>
+    
+    <video id="video" autoplay></video>
+    <div>
+        <button id="captureBtn">Capture</button>
+        <span id="status">0/20 images captured</span>
+    </div>
+    
+    <script>
+        // Get parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const badge_id = urlParams.get('badge_id');
+        const name = decodeURIComponent(urlParams.get('name'));
+        
+        if (!badge_id || !name) {
+            alert('Missing parameters. Please start from the registration page.');
+            window.location.href = '/Login.html';
+        }
+        
+        // Display user information
+        document.getElementById('userName').textContent = name;
+        document.getElementById('badgeId').textContent = badge_id;
+        
+        let sampleCount = 0;
+        const video = document.getElementById('video');
+        const captureBtn = document.getElementById('captureBtn');
+        const status = document.getElementById('status');
+        
+        // Access the camera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Error accessing camera:', error);
+                status.textContent = 'Error accessing camera. Please check permissions.';
+                status.className = 'error';
+                captureBtn.disabled = true;
+            });
+        
+        // Capture image
+        captureBtn.addEventListener('click', () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Convert to base64
+            const imageData = canvas.toDataURL('image/jpeg');
+            
+            // Send to API
+            fetch('http://localhost:5000/capture_face', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    badge_id: badge_id,
+                    image: imageData
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    sampleCount = data.count;
+                    status.textContent = `${sampleCount}/20 images captured`;
+                    status.className = 'success';
+                    
+                    if (sampleCount >= 20) {
+                        status.textContent = 'Registration complete! Training model...';
+                        captureBtn.disabled = true;
+                        
+                        // Train the model
+                        fetch('http://localhost:5000/train')
+                            .then(response => response.json())
+                            .then(trainData => {
+                                if (trainData.success) {
+                                    status.textContent = 'Registration and training complete!';
+                                    
+                                    // Redirect after a delay
+                                    setTimeout(() => {
+                                        window.location.href = '/Frontend/Registration.html';
+                                    }, 2000);
+                                } else {
+                                    status.textContent = 'Training failed: ' + trainData.message;
+                                    status.className = 'error';
+                                    captureBtn.disabled = false;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Training error:', error);
+                                status.textContent = 'Error during training';
+                                status.className = 'error';
+                                captureBtn.disabled = false;
+                            });
+                    }
+                } else {
+                    status.textContent = 'Error: ' + data.message;
+                    status.className = 'error';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                status.textContent = 'Error capturing image';
+                status.className = 'error';
+            });
+        });
+    </script>
+</body>
+</html>
