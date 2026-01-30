@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Univen Campus Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="chat-container">
+    <header class="chat-header"><h2>Univen Campus Assistant</h2></header>
+    <div class="chat-box" id="chat-box"></div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off">
+      <button id="send-btn">Send</button>
+    </div>
+  </div>
+
+<script>
+async function sendMessage(){
+  const input = document.getElementById('user-input');
+  const text = input.value.trim();
+  if(!text) return;
+  const box = document.getElementById('chat-box');
+  const userDiv = document.createElement('div'); userDiv.className='user-msg'; userDiv.textContent = text; box.appendChild(userDiv);
+  input.value='';
+  box.scrollTop = box.scrollHeight;
+  try{
+    const res = await fetch('/get', {method:'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({message:text})});
+    const data = await res.json();
+    const botDiv = document.createElement('div'); botDiv.className='bot-msg'; botDiv.textContent = data.response; box.appendChild(botDiv);
+    box.scrollTop = box.scrollHeight;
+  }catch(e){
+    const errDiv = document.createElement('div'); errDiv.className='bot-msg'; errDiv.textContent = 'Error: '+e; box.appendChild(errDiv);
+    box.scrollTop = box.scrollHeight;
+  }
+}
+
+document.getElementById('send-btn').addEventListener('click', sendMessage);
+document.getElementById('user-input').addEventListener('keydown', function(e){ if(e.key === 'Enter') sendMessage(); });
+</script>
+</body>
+</html>
